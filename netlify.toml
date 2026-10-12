@@ -1,0 +1,7 @@
+# Netlify reads this file automatically when the site is connected to GitHub.
+# There is no build step: Netlify publishes the "site" folder exactly as-is.
+# Security headers live in site/_headers.
+
+[build]
+  publish = "site"
+  command = ""
