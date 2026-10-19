@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BPI Commercial LLC | Commercial Real Estate Brokerage in Beaumont, TX</title>
+<meta name="description" content="BPI Commercial LLC (Burns Properties, Inc.) is a second-generation commercial real estate brokerage in Beaumont, TX, serving Southeast Texas since 1976. Retail, office, industrial, land, and multifamily sales, leasing, and representation.">
+<meta name="keywords" content="commercial real estate Beaumont TX, Burns Properties, BPI Commercial LLC, commercial real estate broker Texas, industrial property Beaumont, retail space for lease Beaumont, office space Beaumont Texas, Jefferson County commercial real estate">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://bpicommercial.org/">
+
+<!-- Open Graph / Facebook / iMessage -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bpicommercial.org/">
+<meta property="og:title" content="BPI Commercial LLC | Commercial Real Estate Brokerage in Beaumont, TX">
+<meta property="og:description" content="Second-generation commercial real estate brokerage serving Southeast Texas since 1976. Retail, office, industrial, land, and multifamily sales, leasing, and representation.">
+<meta property="og:image" content="https://bpicommercial.org/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="BPI Commercial LLC sign at a retail center">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BPI Commercial LLC | Commercial Real Estate Brokerage in Beaumont, TX">
+<meta name="twitter:description" content="Second-generation commercial real estate brokerage serving Southeast Texas since 1976.">
+<meta name="twitter:image" content="https://bpicommercial.org/og-image.jpg">
+
+<!-- Structured Data: Local Business -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "BPI Commercial LLC (Burns Properties, Inc.)",
+  "image": "https://bpicommercial.org/og-image.jpg",
+  "url": "https://bpicommercial.org/",
+  "telephone": "+1-409-866-2398",
+  "email": "aburns@burnspropertiesinc.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "6845 Phelan Blvd",
+    "addressLocality": "Beaumont",
+    "addressRegion": "TX",
+    "postalCode": "77706",
+    "addressCountry": "US"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Beaumont, Texas"
+  },
+  "foundingDate": "1976",
+  "founder": {
+    "@type": "Person",
+    "name": "Robert S. Burns"
+  },
+  "employee": {
+    "@type": "Person",
+    "name": "Andrew R. Burns",
+    "jobTitle": "Principal Broker"
+  },
+  "priceRange": "$$",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "opens": "08:00",
+    "closes": "17:00"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<script src="/vendor/supabase-js-2.117.2.js"></script>
+<style>
+  :root {
+    --navy: #0B1F3A;
+    --navy-light: #152d54;
+    --navy-dark: #07152A;
+    --black: #0A0A0A;
+    --white: #FFFFFF;
+    --gray-50: #F8F9FA;
+    --gray-100: #F1F3F5;
+    --gray-200: #E9ECEF;
+    --gray-400: #ADB5BD;
+    --gray-600: #6C757D;
+    --gray-800: #343A40;
+    --gold: #C8A96E;
+    --gold-light: #D9BC8A;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; color: var(--black); background: var(--white); overflow-x: hidden; }
+  #nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(7,21,42,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(200,169,110,0.15); }
+  .nav-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 72px; }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; }
+  .nav-logo-mark { width: 42px; height: 42px; background: var(--gold); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; color: var(--navy-dark); }
+  .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+  .nav-logo-name { font-size: 1.1rem; font-weight: 800; color: var(--white); }
+  .nav-logo-sub { font-size: 0.6rem; font-weight: 500; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; }
+  .nav-links { display: flex; align-items: center; gap: 0.25rem; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.5rem 0.85rem; border-radius: 4px; cursor: pointer; }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-cta { background: var(--gold) !important; color: var(--navy-dark) !important; font-weight: 700 !important; padding: 0.55rem 1.25rem !important; border-radius: 4px !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+  .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: var(--navy-dark); padding: 1.5rem 2rem; z-index: 999; }
+  .mobile-menu.open { display: flex; flex-direction: column; gap: 0.5rem; }
+  .mobile-menu a { color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.75rem 0; cursor: pointer; }
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+  .hero { min-height: 100vh; position: relative; display: flex; align-items: center; background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, #1a3460 100%); overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(7,21,42,0.7) 0%, rgba(7,21,42,0.5) 100%), url('/images/bpi-retail-center-hero.jpg'); background-size: cover; background-position: center; }
+  .hero-content { position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; padding: 8rem 2rem 4rem; width: 100%; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; background: rgba(200,169,110,0.15); border: 1px solid rgba(200,169,110,0.35); color: var(--gold); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.45rem 1rem; border-radius: 3px; margin-bottom: 2rem; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5.5vw, 4.2rem); font-weight: 800; color: var(--white); line-height: 1.1; max-width: 800px; margin-bottom: 1.5rem; }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.72); max-width: 580px; line-height: 1.7; margin-bottom: 2.5rem; }
+  .hero-btns { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .btn-primary { background: var(--gold); color: var(--navy-dark); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.9rem 2rem; border-radius: 4px; text-decoration: none; border: none; cursor: pointer; display: inline-block; }
+  .btn-outline { background: transparent; color: var(--white); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.9rem 2rem; border-radius: 4px; text-decoration: none; border: 1px solid rgba(255,255,255,0.4); cursor: pointer; display: inline-block; }
+  .btn-outline-dark { background: transparent; color: var(--navy); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.85rem 1.75rem; border-radius: 4px; text-decoration: none; border: 2px solid var(--navy); cursor: pointer; display: inline-block; }
+  .hero-stats { display: flex; gap: 3rem; margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.12); }
+  .hero-stat-num { font-size: 2rem; font-weight: 800; color: var(--white); }
+  .hero-stat-num span { color: var(--gold); }
+  .hero-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin-top: 2px; }
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1280px; margin: 0 auto; }
+  .section-eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--gold); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; color: var(--navy-dark); line-height: 1.15; margin-bottom: 1rem; }
+  .section-sub { font-size: 1rem; color: var(--gray-600); line-height: 1.7; max-width: 560px; }
+  .divider { width: 48px; height: 3px; background: var(--gold); margin: 1.25rem 0; }
+  .services-section { background: var(--gray-50); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+  .service-card { background: var(--white); border: 1px solid var(--gray-200); padding: 2.5rem 2rem; border-radius: 6px; }
+  .service-icon { width: 52px; height: 52px; background: rgba(11,31,58,0.06); display: flex; align-items: center; justify-content: center; border-radius: 6px; margin-bottom: 1.5rem; font-size: 1.5rem; }
+  .service-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--navy-dark); margin-bottom: 0.75rem; }
+  .service-card p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.7; }
+  .service-link { display: inline-flex; align-items: center; gap: 6px; color: var(--gold); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; margin-top: 1.25rem; text-decoration: none; cursor: pointer; }
+  .brochure-section { padding: 4rem 2rem 1rem; }
+  .brochure-section .section-eyebrow { display: flex; justify-content: center; }
+  .brochure-section h2 { text-align: center; color: var(--navy-dark); font-size: 1.7rem; margin-bottom: 2.5rem; }
+  .brochure-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .brochure-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; overflow: hidden; text-decoration: none; color: inherit; display: block; transition: box-shadow 0.2s ease, transform 0.2s ease; }
+  .brochure-card:hover { box-shadow: 0 10px 28px rgba(11,31,58,0.14); transform: translateY(-3px); }
+  .brochure-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+  .brochure-card-body { padding: 1.25rem 1.5rem 1.5rem; }
+  .brochure-badge { display: inline-block; background: var(--gold); color: var(--navy-dark); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.6rem; border-radius: 3px; margin-bottom: 0.75rem; }
+  .brochure-card h3 { font-size: 1.05rem; font-weight: 700; margin: 0 0 0.35rem; color: var(--navy-dark); }
+  .brochure-address { font-size: 0.82rem; color: var(--gray-600); margin-bottom: 0.6rem; }
+  .brochure-meta { font-size: 0.78rem; color: var(--gray-800); margin-bottom: 1.1rem; line-height: 1.5; }
+  .brochure-cta { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--navy-dark); }
+  .brochure-cta::after { content: '→'; color: var(--gold); }
+  .prop-types-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 3rem; }
+  .prop-type-card { position: relative; border-radius: 6px; overflow: hidden; aspect-ratio: 4/3; cursor: pointer; }
+  .prop-type-card img { width: 100%; height: 100%; object-fit: cover; }
+  .prop-type-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(7,21,42,0.9) 0%, rgba(7,21,42,0.2) 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; }
+  .prop-type-label { color: var(--gold); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.25rem; }
+  .prop-type-name { color: var(--white); font-size: 1.15rem; font-weight: 700; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .why-image { position: relative; }
+  .why-image img { width: 100%; border-radius: 6px; display: block; }
+  .why-badge { position: absolute; bottom: -1.5rem; right: -1.5rem; background: var(--gold); padding: 1.5rem; border-radius: 6px; text-align: center; min-width: 130px; }
+  .why-badge-num { font-size: 2.2rem; font-weight: 900; color: var(--navy-dark); line-height: 1; }
+  .why-badge-label { font-size: 0.7rem; font-weight: 600; color: var(--navy-dark); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+  .why-points { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  .why-point { display: flex; gap: 1rem; align-items: flex-start; }
+  .why-check { width: 24px; height: 24px; background: var(--navy-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; font-size: 0.7rem; color: var(--gold); }
+  .why-point-text h4 { font-size: 0.95rem; font-weight: 700; color: var(--navy-dark); margin-bottom: 3px; }
+  .why-point-text p { font-size: 0.875rem; color: var(--gray-600); line-height: 1.6; }
+  .cta-banner { background: var(--navy-dark); padding: 5rem 2rem; text-align: center; position: relative; }
+  .cta-banner h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--white); margin-bottom: 1rem; }
+  .cta-banner p { color: rgba(255,255,255,0.65); font-size: 1rem; margin-bottom: 2rem; }
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .page-hero { background: var(--navy-dark); padding: 8rem 2rem 4rem; }
+  .works-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .works-gallery figure { margin: 0; border-radius: 6px; overflow: hidden; background: var(--gray-100); aspect-ratio: 3/2; }
+  .works-gallery a { display: block; height: 100%; }
+  .works-gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .works-gallery a:hover img { transform: scale(1.03); }
+  @media (max-width: 768px) { .works-gallery { grid-template-columns: 1fr; } }
+  .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--white); margin-bottom: 0.75rem; }
+  .page-hero p { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 560px; line-height: 1.7; }
+  .listings-section { padding: 3rem 2rem 5rem; background: var(--gray-50); }
+  .about-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; padding: 5rem 2rem; }
+  .about-intro-img img { width: 100%; border-radius: 6px; display: block; }
+
+  /* ── About: office sketch ── */
+  #page-about { --sketch-overlap: clamp(44px, 9vw, 150px); --sketch-drift: clamp(18px, 3.5vw, 48px); }
+  .office-sketch { display: flow-root; position: relative; z-index: 2; padding: clamp(3rem, 7vw, 6rem) clamp(1rem, 3vw, 2rem) 0; background: linear-gradient(180deg, var(--gray-50) 0%, var(--gray-50) 45%, var(--white) 100%); overflow-x: clip; }
+  .office-sketch__parallax { max-width: 1240px; margin: 0 auto calc(-1 * var(--sketch-overlap)); transform: translate3d(0, var(--sketch-shift, 0px), 0); opacity: var(--sketch-fade, 1); will-change: transform, opacity; }
+  .office-sketch__reveal { opacity: 0; transform: translate3d(0, 56px, 0); transition: opacity 1.2s cubic-bezier(.2,.7,.2,1), transform 1.4s cubic-bezier(.2,.7,.2,1); }
+  .office-sketch.is-revealed .office-sketch__reveal { opacity: 1; transform: none; }
+  .office-sketch__tilt { margin: 0; transform: perspective(1800px) rotateX(var(--sketch-rx, 0deg)) rotateY(var(--sketch-ry, 0deg)) translate3d(0, var(--sketch-lift, 0px), 0); transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+  .office-sketch__tilt img { display: block; width: 100%; height: auto; user-select: none; -webkit-user-drag: none; filter: drop-shadow(0 14px 16px rgba(7,21,42,0.05)); transition: filter .7s ease; }
+  .office-sketch.is-hovering .office-sketch__tilt img { filter: drop-shadow(0 22px 22px rgba(7,21,42,0.09)); }
+  .after-office-sketch { height: calc(2.5rem + var(--sketch-overlap) + var(--sketch-drift)); background: var(--white); }
+  @media (prefers-reduced-motion: reduce) {
+    .office-sketch__parallax { transform: none; opacity: 1; will-change: auto; }
+    .office-sketch__reveal { opacity: 1; transform: none; transition: none; }
+    .office-sketch__tilt, .office-sketch__tilt img { transform: none; transition: none; }
+  }
+  @media (min-width: 769px) { .about-intro { align-items: start; } .about-intro-img { position: sticky; top: 104px; } }
+  .value-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem; }
+  .value-card { background: var(--gray-50); border: 1px solid var(--gray-200); padding: 1.5rem; border-radius: 6px; border-left: 3px solid var(--gold); }
+  .value-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--navy-dark); margin-bottom: 0.35rem; }
+  .value-card p { font-size: 0.82rem; color: var(--gray-600); line-height: 1.6; }
+  .team-section { background: var(--gray-50); padding: 5rem 2rem; }
+  .broker-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; overflow: hidden; max-width: 380px; }
+  .broker-img { height: 280px; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); position: relative; overflow: hidden; }
+  .broker-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 5rem; color: rgba(255,255,255,0.15); }
+  .broker-img img { width: 100%; height: 100%; object-fit: cover; }
+  .broker-body { padding: 1.75rem; }
+  .broker-name { font-size: 1.2rem; font-weight: 800; color: var(--navy-dark); }
+  .broker-title { font-size: 0.78rem; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+  .broker-bio { font-size: 0.875rem; color: var(--gray-600); line-height: 1.7; }
+  .broker-layout { margin-top: 2.5rem; display: grid; grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); gap: 2rem; align-items: start; }
+  .broker-card--feature { max-width: none; display: grid; grid-template-columns: minmax(220px, 0.85fr) 1.15fr; }
+  .broker-card--feature .broker-img { height: auto; min-height: 420px; background: var(--gray-100); }
+  .broker-card--feature .broker-img img { position: absolute; inset: 0; object-position: 50% 20%; }
+  .broker-card--feature .broker-body { padding: 2.25rem; display: flex; flex-direction: column; justify-content: center; }
+  .broker-card--feature .broker-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; }
+  .broker-card--feature .broker-bio { font-size: 0.925rem; }
+  .broker-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+  .broker-actions .btn-primary, .broker-actions .btn-outline-dark { font-size: 0.78rem; padding: 0.85rem 1.25rem; text-align: center; }
+  .broker-actions > * { flex: 1 1 auto; }
+  .broker-team { display: flex; flex-direction: column; gap: 1rem; }
+  #inquiryForm { scroll-margin-top: 140px; }
+  @media (max-width: 1024px) { .broker-layout { grid-template-columns: 1fr; } .broker-team { flex-direction: row; flex-wrap: wrap; } .broker-team > div { flex: 1 1 280px; } }
+  @media (max-width: 680px) {
+    .broker-card--feature { grid-template-columns: 1fr; }
+    .broker-card--feature .broker-img { aspect-ratio: 1 / 1; min-height: 0; }
+    .broker-card--feature .broker-img img { object-position: 50% 15%; }
+    .broker-card--feature .broker-body { padding: 1.75rem; }
+    .broker-actions > * { flex: 1 1 100%; }
+  }
+  .brok-service { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; padding: 4rem 0; border-bottom: 1px solid var(--gray-100); }
+  .brok-service:last-child { border-bottom: none; }
+  .brok-service.reverse { direction: rtl; }
+  .brok-service.reverse > * { direction: ltr; }
+  .brok-service-img { border-radius: 6px; overflow: hidden; height: 320px; }
+  .brok-service-img img { width: 100%; height: 100%; object-fit: cover; }
+  .brok-service-num { font-size: 3rem; font-weight: 900; color: var(--gray-100); line-height: 1; margin-bottom: -0.5rem; }
+  .brok-service h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--navy-dark); margin-bottom: 1rem; }
+  .brok-service p { font-size: 0.92rem; color: var(--gray-600); line-height: 1.75; margin-bottom: 1.25rem; }
+  .brok-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .brok-bullets li { font-size: 0.875rem; color: var(--gray-800); padding-left: 1.25rem; position: relative; }
+  .brok-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+  .rep-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .rep-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 2.5rem 2rem; position: relative; overflow: hidden; }
+  .rep-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+  .rep-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .rep-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--navy-dark); margin-bottom: 0.75rem; }
+  .rep-card p { font-size: 0.875rem; color: var(--gray-600); line-height: 1.7; margin-bottom: 1.25rem; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; }
+  .contact-info h3 { font-size: 1.3rem; font-weight: 700; color: var(--navy-dark); margin-bottom: 1.5rem; }
+  .contact-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.5rem; }
+  .contact-icon { width: 44px; height: 44px; background: var(--navy-dark); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .contact-detail h4 { font-size: 0.78rem; font-weight: 700; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+  .contact-detail p { font-size: 0.92rem; color: var(--navy-dark); font-weight: 500; }
+  .contact-form { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 8px; padding: 2.5rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-group label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--gray-800); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--gray-200); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--navy-dark); background: var(--white); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-submit { width: 100%; padding: 1rem; font-size: 0.9rem; }
+  .form-submit:disabled { opacity: 0.65; cursor: not-allowed; }
+  .form-group input.field-invalid, .form-group select.field-invalid, .form-group textarea.field-invalid { border-color: #B42318; box-shadow: 0 0 0 3px rgba(180,35,24,0.08); }
+  .form-status { display: none; margin-top: 1rem; padding: 0.9rem 1rem; border-radius: 4px; font-size: 0.875rem; line-height: 1.5; }
+  .form-status.is-visible { display: block; }
+  .form-status.is-success { background: #ECFDF3; border: 1px solid #ABEFC6; color: #085D3A; }
+  .form-status.is-error { background: #FEF3F2; border: 1px solid #FECDCA; color: #912018; }
+  .form-status a { color: inherit; font-weight: 600; }
+  footer { background: var(--navy-dark); border-top: 1px solid rgba(200,169,110,0.15); padding: 4rem 2rem 2rem; }
+  .footer-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .footer-brand p { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.7; margin-top: 1rem; max-width: 280px; }
+  .footer-col h4 { font-size: 0.72rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .footer-col a { display: block; color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.6rem; cursor: pointer; }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding-top: 1.5rem; }
+  .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero-stats { gap: 1.5rem; }
+    .prop-types-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-grid, .about-intro, .brok-service, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .brok-service.reverse { direction: ltr; }
+    .why-badge { right: 0; bottom: -1rem; }
+    .value-cards { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .prop-types-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="showPage('home')">
+      <div class="nav-logo-mark">BPI</div>
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">BPI Commercial LLC</span>
+        <span class="nav-logo-sub">Commercial Real Estate</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a onclick="showPage('home')" class="active" id="nav-home">Home</a>
+      <a onclick="showPage('about')" id="nav-about">About</a>
+      <a onclick="showPage('services')" id="nav-services">Brokerage Services</a>
+      <a onclick="showPage('listings')" id="nav-listings">Properties</a>
+      <a onclick="showPage('representation')" id="nav-representation">Representation</a>
+      <a onclick="showPage('works')" id="nav-works">Works</a>
+      <a onclick="showPage('contact')" class="nav-cta" id="nav-contact">Contact the Broker</a>
+    </div>
+    <div class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="showPage('home');toggleMobile()">Home</a>
+  <a onclick="showPage('about');toggleMobile()">About</a>
+  <a onclick="showPage('services');toggleMobile()">Brokerage Services</a>
+  <a onclick="showPage('listings');toggleMobile()">Properties</a>
+  <a onclick="showPage('representation');toggleMobile()">Representation</a>
+  <a onclick="showPage('works');toggleMobile()">Works</a>
+  <a onclick="showPage('contact');toggleMobile()">Contact the Broker</a>
+</div>
+
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Commercial Real Estate Brokerage</div>
+      <h1>Commercial Real Estate Brokerage Built on <em>Market Knowledge</em></h1>
+      <p class="hero-sub">We represent owners, investors, landlords, tenants, buyers, and sellers across commercial real estate markets — delivering transaction results grounded in local expertise.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showPage('listings')">View Available Properties</button>
+        <button class="btn-outline" onclick="showPage('representation')">Request Representation</button>
+        <button class="btn-outline" onclick="showPage('contact')">Contact the Broker</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="hero-stat-num" style="font-size:1.5rem;">Originally Founded in 1976</div><div class="hero-stat-label">Family-Led Firm</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services-section">
+    <div class="container">
+      <div class="fade-in">
+        <div class="section-eyebrow">What We Do</div>
+        <h2 class="section-title">Full-Spectrum Commercial Brokerage Services</h2>
+        <div class="divider"></div>
+        <p class="section-sub">From investment sales to tenant representation, we provide strategic brokerage services across every commercial property sector.</p>
+      </div>
+      <div class="services-grid fade-in">
+        <div class="service-card"><div class="service-icon">🏢</div><h3>Seller Representation</h3><p>Strategic property marketing, positioning, and sale representation for commercial owners looking to maximize asset value.</p><a class="service-link" onclick="showPage('services')">Learn More →</a></div>
+        <div class="service-card"><div class="service-icon">🔍</div><h3>Buyer Representation</h3><p>Helping buyers and investors identify, evaluate, and acquire commercial properties aligned with their investment strategy.</p><a class="service-link" onclick="showPage('services')">Learn More →</a></div>
+        <div class="service-card"><div class="service-icon">🏗️</div><h3>Landlord Representation</h3><p>Maximizing occupancy and lease value for commercial property owners through targeted tenant outreach and leasing strategy.</p><a class="service-link" onclick="showPage('services')">Learn More →</a></div>
+        <div class="service-card"><div class="service-icon">📋</div><h3>Tenant Representation</h3><p>Site selection, lease negotiation, and market analysis for businesses seeking commercial space on favorable terms.</p><a class="service-link" onclick="showPage('services')">Learn More →</a></div>
+        <div class="service-card"><div class="service-icon">📈</div><h3>Investment Sales</h3><p>Evaluating income-producing properties and connecting buyers and sellers across investment-grade commercial assets.</p><a class="service-link" onclick="showPage('services')">Learn More →</a></div>
+        <div class="service-card"><div class="service-icon">🌐</div><h3>Land & Development</h3><p>Advising clients on land acquisition, disposition, and development opportunities for commercial projects.</p><a class="service-link" onclick="showPage('services')">Learn More →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--white); padding: 5rem 2rem;">
+    <div class="container">
+      <div class="fade-in">
+        <div class="section-eyebrow">Property Types</div>
+        <h2 class="section-title">We Work Across All Commercial Property Sectors</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="prop-types-grid fade-in">
+        <div class="prop-type-card"><img src="/images/bpi-retail-card.jpg" alt="Retail storefronts at a BPI Commercial property" loading="lazy"><div class="prop-type-overlay"><div class="prop-type-label">Commercial</div><div class="prop-type-name">Retail</div></div></div>
+        <div class="prop-type-card"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80" alt="Office"><div class="prop-type-overlay"><div class="prop-type-label">Commercial</div><div class="prop-type-name">Office</div></div></div>
+        <div class="prop-type-card"><img src="https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=600&q=80" alt="Industrial"><div class="prop-type-overlay"><div class="prop-type-label">Commercial</div><div class="prop-type-name">Industrial</div></div></div>
+        <div class="prop-type-card"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80" alt="Land"><div class="prop-type-overlay"><div class="prop-type-label">Development</div><div class="prop-type-name">Land</div></div></div>
+        <div class="prop-type-card"><img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="Multifamily"><div class="prop-type-overlay"><div class="prop-type-label">Investment</div><div class="prop-type-name">Multifamily</div></div></div>
+        <div class="prop-type-card"><img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?w=600&q=80" alt="Mixed-Use"><div class="prop-type-overlay"><div class="prop-type-label">Development</div><div class="prop-type-name">Mixed-Use</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--gray-50); padding: 5rem 2rem;">
+    <div class="container">
+      <div class="why-grid">
+        <div class="why-image fade-in">
+          <img src="/images/bpi-retail-center-sign-angle.jpg" alt="BPI Commercial LLC sign in front of a retail center" loading="lazy">
+          <div class="why-badge"><div class="why-badge-num">1976</div><div class="why-badge-label">Originally Founded</div></div>
+        </div>
+        <div class="fade-in">
+          <div class="section-eyebrow">Why BPI Commercial LLC</div>
+          <h2 class="section-title">Representation That Works for You</h2>
+          <div class="divider"></div>
+          <p class="section-sub">Our brokerage is built on client representation — not just deal volume. Every engagement begins with understanding your goals and ends with a transaction that reflects them.</p>
+          <div class="why-points">
+            <div class="why-point"><div class="why-check">✓</div><div class="why-point-text"><h4>Deep Local Market Knowledge</h4><p>We know submarkets, rental rates, vacancy trends, and which deals are actually closing.</p></div></div>
+            <div class="why-point"><div class="why-check">✓</div><div class="why-point-text"><h4>Strategic Transaction Guidance</h4><p>From pricing strategy to lease structure, we advise clients through every phase of a transaction.</p></div></div>
+            <div class="why-point"><div class="why-check">✓</div><div class="why-point-text"><h4>Owner & Tenant Representation</h4><p>We represent both sides of commercial real estate — landlords, tenants, buyers, sellers, and investors.</p></div></div>
+            <div class="why-point"><div class="why-check">✓</div><div class="why-point-text"><h4>Long-Term Client Relationships</h4><p>Most of our business comes from repeat clients and referrals. We build relationships that last well beyond any single transaction.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner fade-in">
+    <div class="container">
+      <div class="section-eyebrow" style="justify-content: center; margin-bottom: 1rem;">Get Started</div>
+      <h2>Ready to Move on Your Commercial Real Estate Goals?</h2>
+      <p>Whether you're buying, selling, leasing, or investing — BPI Commercial LLC is your brokerage partner.</p>
+      <div class="cta-btns">
+        <button class="btn-primary" onclick="showPage('contact')">Contact the Broker</button>
+        <button class="btn-outline" onclick="showPage('listings')">View Properties</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-about">
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-eyebrow">About BPI Commercial LLC</div>
+      <h1>A Family Legacy in Southeast Texas Real Estate</h1>
+      <p>BPI Commercial LLC provides full-service commercial real estate brokerage and property management across Southeast Texas. With roots dating to 1976, our business has evolved across two generations while remaining guided by one consistent principle: the client’s best interest comes first.</p>
+    </div>
+  </div>
+  <div class="about-intro container" style="max-width:1280px; margin:0 auto;">
+    <div class="about-intro-img fade-in"><img src="/images/bpi-retail-center-sign-front.jpg" alt="BPI Commercial LLC sign at a retail center" loading="lazy"></div>
+    <div class="fade-in">
+      <div class="section-eyebrow">Our Story</div>
+      <h2 class="section-title">From Burns Real Estate to BPI Commercial</h2>
+      <div class="divider"></div>
+      <p style="font-size:0.95rem;color:var(--gray-600);line-height:1.8;margin-bottom:1rem;">Our story began in 1976, when Robert S. Burns founded Burns Real Estate and Management Company. Through a commitment to truth, fairness, and personal service, he established a respected name in Southeast Texas commercial real estate. As the business grew, it became Hare, Burns &amp; Osborne Real Estate-Commercial.</p>
+      <p style="font-size:0.95rem;color:var(--gray-600);line-height:1.8;margin-bottom:1rem;">In 1990, Robert’s son, Andrew R. Burns, joined the firm. In 1992, father and son reorganized the company as Burns Properties, Inc., continuing to build on the relationships, experience, and values established by Robert.</p>
+      <p style="font-size:0.95rem;color:var(--gray-600);line-height:1.8;margin-bottom:1rem;">Today, Andrew carries that legacy forward through BPI Commercial LLC, bringing decades of brokerage and property management experience to every engagement. He personally manages each client relationship and transaction, providing consistent guidance from the first conversation through closing.</p>
+      <p style="font-size:0.95rem;color:var(--gray-600);line-height:1.8;margin-bottom:1rem;">Clients benefit from both Andrew’s hands-on experience and the knowledge developed throughout the company’s history. His active membership in the National Association of Realtors, Texas Association of Realtors, and Houston Association of Realtors further supports his commitment to professional service.</p>
+      <p style="font-size:0.95rem;color:var(--gray-600);line-height:1.8;">Referrals and repeat clients have sustained the business across generations—a reflection of the trust earned through honest advice, hard work, and lasting relationships. We invite you to get to know our company and the people behind it.</p>
+      <div class="value-cards" style="margin-top:2rem;">
+        <div class="value-card"><h4>Client-First Philosophy</h4><p>The client’s best interest guides every recommendation and every transaction.</p></div>
+        <div class="value-card"><h4>Direct, Personal Service</h4><p>Work directly with Andrew from your first call through closing, with personal attention and consistent communication throughout.</p></div>
+        <div class="value-card"><h4>Industry Affiliations</h4><p>Andrew maintains active membership in the National Association of Realtors, Texas Association of Realtors, and Houston Association of Realtors.</p></div>
+        <div class="value-card"><h4>A Legacy Built on Trust</h4><p>Founded by Robert S. Burns in 1976 and carried forward by his son, Andrew, our business combines longstanding local knowledge with personal client service.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="office-sketch" id="office-sketch" aria-label="The BPI Commercial office">
+    <div class="office-sketch__parallax">
+      <div class="office-sketch__reveal">
+        <figure class="office-sketch__tilt">
+          <picture>
+            <source type="image/webp" srcset="/images/bpi-office-sketch-800.webp 800w, /images/bpi-office-sketch-1200.webp 1200w, /images/bpi-office-sketch-1774.webp 1774w" sizes="(max-width: 1300px) 100vw, 1240px">
+            <img src="/images/bpi-office-sketch-1200.png" width="1774" height="692" loading="lazy" decoding="async" draggable="false" alt="Pen-and-ink sketch of the BPI Commercial office: a single-story brick building with dark shutters, a covered entry flanked by potted plants, and a BPI Commercial sign beside the door.">
+          </picture>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <div class="after-office-sketch" aria-hidden="true"></div>
+  <div class="cta-banner fade-in">
+    <div class="container">
+      <h2>Work With a Brokerage That Puts Your Interests First</h2>
+      <p>Reach out to discuss your commercial real estate goals — buying, selling, leasing, or investing.</p>
+      <div class="cta-btns"><button class="btn-primary" onclick="showPage('contact')">Contact the Broker</button><button class="btn-outline" onclick="showPage('services')">View Our Services</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-services">
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-eyebrow">Brokerage Services</div>
+      <h1>Commercial Real Estate Services for Owners, Investors & Tenants</h1>
+      <p>BPI Commercial LLC provides full-spectrum brokerage services — from property disposition and investment sales to site selection and lease negotiation.</p>
+    </div>
+  </div>
+  <section style="padding: 5rem 2rem;">
+    <div class="container">
+      <div class="brok-service fade-in"><div class="brok-service-img"><img src="https://images.unsplash.com/photo-1609770231080-e321deccc34c?w=800&q=80" alt="Seller Representation"></div><div><div class="brok-service-num">01</div><h3>Seller Representation</h3><p>We help commercial property owners market, position, and sell their properties with precision. Our seller representation process begins with a thorough property analysis, competitive pricing strategy, and a targeted marketing campaign designed to reach qualified buyers — not just generate showings.</p><ul class="brok-bullets"><li>Property valuation and pricing strategy</li><li>Targeted buyer outreach and marketing</li><li>Offer analysis and negotiation</li><li>Due diligence and closing coordination</li><li>Exchange and disposition planning</li></ul><button class="btn-outline-dark" style="margin-top:1.5rem;" onclick="showPage('contact')">Discuss Your Property</button></div></div>
+      <div class="brok-service reverse fade-in"><div class="brok-service-img"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" alt="Buyer Representation"></div><div><div class="brok-service-num">02</div><h3>Buyer Representation</h3><p>We help buyers and investors identify, evaluate, and acquire commercial properties that align with their investment or operational strategy. We provide comprehensive market analysis, property comparables, and negotiation support to ensure our clients make informed acquisitions.</p><ul class="brok-bullets"><li>Market and submarket analysis</li><li>Property identification and screening</li><li>Financial analysis and underwriting support</li><li>LOI preparation and purchase negotiation</li><li>Due diligence coordination</li></ul><button class="btn-outline-dark" style="margin-top:1.5rem;" onclick="showPage('contact')">Start Your Search</button></div></div>
+      <div class="brok-service fade-in"><div class="brok-service-img"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80" alt="Landlord Representation"></div><div><div class="brok-service-num">03</div><h3>Landlord Representation</h3><p>We help commercial landlords maximize occupancy and lease value for their properties. From repositioning a vacant space to structuring long-term leases with creditworthy tenants, our landlord representation services are designed to protect and grow your asset's performance.</p><ul class="brok-bullets"><li>Leasing strategy and pricing</li><li>Property marketing and tenant outreach</li><li>Tenant screening and qualification</li><li>Lease negotiation and structuring</li><li>Renewal and expansion management</li></ul><button class="btn-outline-dark" style="margin-top:1.5rem;" onclick="showPage('contact')">Lease Your Property</button></div></div>
+      <div class="brok-service reverse fade-in"><div class="brok-service-img"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" alt="Tenant Representation"></div><div><div class="brok-service-num">04</div><h3>Tenant Representation</h3><p>We represent businesses in identifying, comparing, and securing commercial space on favorable terms. Our tenant representation services provide the market intelligence and negotiating leverage businesses need to make sound real estate decisions.</p><ul class="brok-bullets"><li>Site selection and space search</li><li>Market surveys and space comparisons</li><li>Lease term analysis and negotiation</li><li>Tenant improvement allowance negotiation</li><li>Renewal, relocation, and expansion advisory</li></ul><button class="btn-outline-dark" style="margin-top:1.5rem;" onclick="showPage('contact')">Find Your Space</button></div></div>
+      <div class="brok-service fade-in"><div class="brok-service-img"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80" alt="Investment Sales"></div><div><div class="brok-service-num">05</div><h3>Investment Sales</h3><p>We help clients evaluate, acquire, and dispose of income-producing commercial properties. Our investment sales practice serves private investors, family offices, and institutional buyers looking to transact on commercial real estate with confidence.</p><ul class="brok-bullets"><li>Cap rate and cash-on-cash analysis</li><li>Income property marketing and disposition</li><li>Investor buyer identification and outreach</li><li>Redevelopment and value-add opportunity analysis</li><li>1031 exchange coordination</li></ul><button class="btn-outline-dark" style="margin-top:1.5rem;" onclick="showPage('contact')">Discuss Investment Strategy</button></div></div>
+      <div class="brok-service reverse fade-in"><div class="brok-service-img"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80" alt="Land Brokerage"></div><div><div class="brok-service-num">06</div><h3>Land & Development Brokerage</h3><p>We advise buyers, sellers, and developers in land transactions for commercial development. Whether you're selling a development site or sourcing land for a project, our brokerage provides the market data and representation you need to transact with confidence.</p><ul class="brok-bullets"><li>Land valuation and highest-use analysis</li><li>Zoning and entitlement research</li><li>Developer outreach and disposition marketing</li><li>Land acquisition and site selection</li><li>Ground lease structuring</li></ul><button class="btn-outline-dark" style="margin-top:1.5rem;" onclick="showPage('contact')">Discuss a Land Opportunity</button></div></div>
+    </div>
+  </section>
+  <div class="cta-banner fade-in">
+    <div class="container">
+      <h2>Not Sure Which Service Fits Your Needs?</h2>
+      <p>Contact Andrew directly and he'll help you identify the right approach for your situation.</p>
+      <div class="cta-btns"><button class="btn-primary" onclick="showPage('contact')">Talk to a Broker</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-listings">
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-eyebrow">Available Properties</div>
+      <h1>Commercial Properties for Sale & Lease</h1>
+      <p>Browse available commercial listings across retail, office, industrial, land, multifamily, and mixed-use property types.</p>
+    </div>
+  </div>
+  <div class="brochure-section">
+    <div class="container">
+      <div class="section-eyebrow">Featured Listings</div>
+      <h2>Property Marketing Brochures</h2>
+      <div class="brochure-grid">
+        <a class="brochure-card" href="brochures/HEB-Shopping-Center-Brochure.pdf" target="_blank" rel="noopener">
+          <img src="brochures/heb-shopping-center-cover.jpg" alt="H-E-B Shopping Center brochure cover" loading="lazy">
+          <div class="brochure-card-body">
+            <span class="brochure-badge">Available for Lease</span>
+            <h3>H-E-B Shopping Center</h3>
+            <div class="brochure-address">📍 3015 N. Dowlen Road, Beaumont, TX 77706</div>
+            <div class="brochure-meta">Grocery-Anchored Retail · In-Line Suites 210–270<br>Asking Rent: $22–$24 / SF / Yr NNN</div>
+            <span class="brochure-cta">View Brochure (PDF)</span>
+          </div>
+        </a>
+        <a class="brochure-card" href="brochures/Lumberton-Plaza-Suite-88-Brochure.pdf" target="_blank" rel="noopener">
+          <img src="brochures/lumberton-plaza-suite-88-cover.jpg" alt="Lumberton Plaza Suite 88 brochure cover" loading="lazy">
+          <div class="brochure-card-body">
+            <span class="brochure-badge">Available for Lease</span>
+            <h3>Lumberton Plaza — Suite 88</h3>
+            <div class="brochure-address">📍 88 NLHS Drive, Lumberton, TX 77657</div>
+            <div class="brochure-meta">End Cap Retail · 2,260 SF<br>Asking Base Rent: $18.00 / SF / Yr NNN</div>
+            <span class="brochure-cta">View Brochure (PDF)</span>
+          </div>
+        </a>
+        <a class="brochure-card" href="brochures/Silsbee-Retail-Space-Brochure.pdf" target="_blank" rel="noopener">
+          <img src="brochures/silsbee-retail-space-cover.jpg" alt="Silsbee Retail Space brochure cover" loading="lazy">
+          <div class="brochure-card-body">
+            <span class="brochure-badge">Available for Lease</span>
+            <h3>Silsbee Retail Space</h3>
+            <div class="brochure-address">📍 1023 Hwy 96 Bypass, Silsbee, TX 77656</div>
+            <div class="brochure-meta">Former GameStop Location · Approx. 1,600 SF<br>Base Rent: $18.00 / SF / Yr NNN</div>
+            <span class="brochure-cta">View Brochure (PDF)</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-representation">
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-eyebrow">Property Representation</div>
+      <h1>We Represent Your Interests in Every Commercial Transaction</h1>
+      <p>Whether you're an owner, landlord, buyer, tenant, or investor — BPI Commercial LLC provides the brokerage representation and market expertise to protect and advance your real estate interests.</p>
+    </div>
+  </div>
+  <section style="padding: 5rem 2rem;">
+    <div class="container">
+      <div class="fade-in" style="text-align:center;max-width:680px;margin:0 auto 4rem;">
+        <div class="section-eyebrow" style="justify-content:center;">Our Representation Services</div>
+        <h2 class="section-title">How We Represent Clients Across Commercial Real Estate</h2>
+        <div class="divider" style="margin:1.25rem auto;"></div>
+        <p class="section-sub" style="margin:0 auto;">Our brokerage exists to represent clients — not just facilitate transactions. Every engagement is built around your goals, your timeline, and your definition of a successful outcome.</p>
+      </div>
+      <div class="rep-cards fade-in">
+        <div class="rep-card"><div class="rep-card-icon">🏷️</div><h3>Selling a Commercial Property</h3><p>We represent property owners in the sale of commercial real estate. Our seller representation process includes property analysis, strategic pricing, targeted marketing, buyer qualification, and negotiation — from listing through closing.</p><p>We don't just list your property. We position it, market it to qualified buyers, and guide you through the transaction with clear communication and expert counsel at every step.</p><button class="btn-outline-dark" onclick="showPage('contact')" style="font-size:0.78rem;padding:0.65rem 1.25rem;">Discuss a Sale</button></div>
+        <div class="rep-card"><div class="rep-card-icon">🔑</div><h3>Leasing a Commercial Property</h3><p>We represent landlords seeking to lease commercial space to qualified tenants. Our landlord representation services cover leasing strategy, property marketing, tenant outreach, lease negotiation, and occupancy optimization.</p><p>Whether you have a single vacant suite or an entire commercial building, we help you attract tenants, structure the right lease, and protect your investment over the long term.</p><button class="btn-outline-dark" onclick="showPage('contact')" style="font-size:0.78rem;padding:0.65rem 1.25rem;">Lease Your Property</button></div>
+        <div class="rep-card"><div class="rep-card-icon">📍</div><h3>Finding Space for a Business</h3><p>We represent tenants in the search for commercial space — from site selection through lease execution. Our tenant representation services give businesses the market data, site comparisons, and negotiating leverage they need to secure the right space on favorable terms.</p><p>We work exclusively for the tenant's interests — not the landlord's — ensuring you have an informed advocate at the negotiating table.</p><button class="btn-outline-dark" onclick="showPage('contact')" style="font-size:0.78rem;padding:0.65rem 1.25rem;">Find Your Space</button></div>
+        <div class="rep-card"><div class="rep-card-icon">📊</div><h3>Buying Investment Property</h3><p>We represent buyers and investors in the acquisition of commercial investment properties. From income-producing retail centers to multifamily assets, we help our clients identify, evaluate, and acquire properties that match their investment strategy.</p><p>Our buyer representation includes market analysis, financial underwriting, LOI preparation, and full negotiation support through closing.</p><button class="btn-outline-dark" onclick="showPage('contact')" style="font-size:0.78rem;padding:0.65rem 1.25rem;">Start Investing</button></div>
+        <div class="rep-card"><div class="rep-card-icon">🌐</div><h3>Land & Development Opportunities</h3><p>We represent buyers, sellers, and developers in land transactions for commercial development. Whether you're selling a development site, seeking land for a project, or evaluating ground lease opportunities, we provide the market intelligence and representation to move forward with confidence.</p><p>Our land brokerage services include zoning review, highest-use analysis, developer outreach, and transaction structuring.</p><button class="btn-outline-dark" onclick="showPage('contact')" style="font-size:0.78rem;padding:0.65rem 1.25rem;">Explore Land</button></div>
+      </div>
+    </div>
+  </section>
+  <div class="cta-banner fade-in">
+    <div class="container">
+      <h2>Ready to Work with a Commercial Broker Who Represents You?</h2>
+      <p>Tell us about your situation and we'll outline the right representation strategy for your needs.</p>
+      <div class="cta-btns"><button class="btn-primary" onclick="showPage('contact')">Request Representation</button><button class="btn-outline" onclick="showPage('services')">Explore Our Services</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-works">
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-eyebrow">Our Works</div>
+      <h1>Featured Transactions & Properties</h1>
+      <p>A look at select transactions and properties BPI Commercial LLC has represented. Check back soon for updates.</p>
+    </div>
+  </div>
+  <section style="padding: 5rem 2rem;">
+    <div class="container">
+      <div class="section-eyebrow">Property Photos</div>
+      <h2 class="section-title" style="margin-bottom:2rem;">Select Properties We Represent</h2>
+      <div class="works-gallery">
+        <figure><a href="/images/bpi-retail-center-storefronts.jpg" target="_blank" rel="noopener"><img src="/images/bpi-retail-center-storefronts.jpg" alt="Retail center storefronts with a BPI Commercial LLC sign" width="1400" height="933" loading="lazy"></a></figure>
+        <figure><a href="/images/bpi-retail-center-sign-angle.jpg" target="_blank" rel="noopener"><img src="/images/bpi-retail-center-sign-angle.jpg" alt="BPI Commercial LLC sign in front of a retail center" width="1400" height="933" loading="lazy"></a></figure>
+        <figure><a href="/images/bpi-retail-center-sign-front.jpg" target="_blank" rel="noopener"><img src="/images/bpi-retail-center-sign-front.jpg" alt="BPI Commercial LLC sign at a retail center" width="1400" height="860" loading="lazy"></a></figure>
+      </div>
+      <p style="text-align:center;color:var(--gray-600);margin-top:2.5rem;">More transactions and properties coming soon.</p>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-contact">
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-eyebrow">Contact BPI Commercial LLC</div>
+      <h1>Talk to a Commercial Real Estate Broker</h1>
+      <p>Whether you're ready to transact or just starting to explore your options, Andrew is here to provide straightforward guidance with no obligation.</p>
+    </div>
+  </div>
+  <section class="team-section" id="meet-the-broker">
+    <div class="container">
+      <div class="section-eyebrow fade-in">Meet Your Broker</div>
+      <h2 class="section-title fade-in">Meet the Broker</h2>
+      <div class="divider fade-in"></div>
+      <div class="broker-layout fade-in">
+        <div class="broker-card broker-card--feature">
+          <div class="broker-img" id="broker-photo-wrap"><img src="/images/andrew-burns.jpg" alt="Andrew R. Burns, Principal Broker at BPI Commercial LLC" width="800" height="1000"></div>
+          <div class="broker-body">
+            <div class="broker-title">Principal Broker</div>
+            <div class="broker-name">Andrew R. Burns</div>
+            <div style="width:32px;height:2px;background:var(--gold);margin:0.75rem 0;"></div>
+            <p class="broker-bio">Andrew R. Burns is the principal broker of BPI Commercial LLC with over 35 years of commercial real estate experience. He has represented owners, investors, landlords, tenants, buyers, and sellers across retail, office, industrial, land, multifamily, and mixed-use transactions. Andrew's reputation in the market is built on preparation, honest counsel, and delivering measurable results for his clients.</p>
+            <div class="broker-actions"><button type="button" class="btn-primary" onclick="scrollToInquiryForm()">Send Andrew a Message</button><a class="btn-outline-dark" href="tel:4098662398">Call (409) 866-2398</a></div>
+          </div>
+        </div>
+        <div class="broker-team">
+          <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:6px;padding:1.5rem;display:flex;align-items:center;gap:1rem;">
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--navy-dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;font-weight:800;color:var(--gold);">TP</div>
+            <div>
+              <div style="font-size:0.95rem;font-weight:700;color:var(--navy-dark);">Tina Prince</div>
+              <div style="font-size:0.78rem;color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">Leasing &amp; Property Management</div>
+              <div style="font-size:0.8rem;color:var(--gray-600);">tprince@burnspropertiesinc.com</div>
+              <div style="font-size:0.8rem;color:var(--gray-600);">(409) 866-2398</div>
+            </div>
+          </div>
+          <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:6px;padding:1.5rem;display:flex;align-items:center;gap:1rem;">
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--navy-dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;font-weight:800;color:var(--gold);">EB</div>
+            <div>
+              <div style="font-size:0.95rem;font-weight:700;color:var(--navy-dark);">Elizabeth Burns</div>
+              <div style="font-size:0.78rem;color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">IT Consultant</div>
+              <div style="font-size:0.8rem;color:var(--gray-600);">eburns4168@gmail.com</div>
+              <div style="font-size:0.8rem;color:var(--gray-600);">(409) 812-5591</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section style="padding: 5rem 2rem;">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="fade-in">
+          <h3>Get in Touch</h3>
+          <div class="contact-item"><div class="contact-icon">📞</div><div class="contact-detail"><h4>Phone</h4><p>(409) 866-2398</p></div></div>
+          <div class="contact-item"><div class="contact-icon">✉️</div><div class="contact-detail"><h4>Email</h4><p>aburns@burnspropertiesinc.com</p></div></div>
+          <div class="contact-item"><div class="contact-icon">📍</div><div class="contact-detail"><h4>Office</h4><p>6845 Phelan Blvd<br>Beaumont, TX 77706</p></div></div>
+          <div class="contact-item"><div class="contact-icon">🕐</div><div class="contact-detail"><h4>Office Hours</h4><p>Monday – Friday: 8:00 AM – 5:00 PM</p></div></div>
+        </div>
+        <div class="contact-form fade-in">
+          <h3 style="font-size:1.2rem;font-weight:700;color:var(--navy-dark);margin-bottom:1.5rem;">Brokerage Inquiry Form</h3>
+          <form id="inquiryForm" name="property-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="property-inquiry">
+          <input type="hidden" name="subject" id="cf_subject" value="New website inquiry - BPI Commercial">
+          <div class="form-row"><div class="form-group"><label for="cf_first">First Name *</label><input type="text" id="cf_first" name="first_name" maxlength="100" autocomplete="given-name" placeholder="First name" required></div><div class="form-group"><label for="cf_last">Last Name *</label><input type="text" id="cf_last" name="last_name" maxlength="100" autocomplete="family-name" placeholder="Last name" required></div></div>
+          <div class="form-row"><div class="form-group"><label for="cf_email">Email Address *</label><input type="email" id="cf_email" name="email" maxlength="254" autocomplete="email" placeholder="your@email.com" required></div><div class="form-group"><label for="cf_phone">Phone Number</label><input type="tel" id="cf_phone" name="phone" maxlength="40" autocomplete="tel" placeholder="(555) 000-0000"></div></div>
+          <div class="form-group"><label for="cf_company">Company Name</label><input type="text" id="cf_company" name="company" maxlength="200" autocomplete="organization" placeholder="Your company (if applicable)"></div>
+          <div class="form-group"><label for="cf_type">Inquiry Type *</label><select id="cf_type" name="inquiry_type" required><option value="" disabled selected>Select your inquiry type</option><option>I want to sell a property</option><option>I want to lease my property</option><option>I am looking to buy</option><option>I am looking for space to lease</option><option>I have a general brokerage question</option></select></div>
+          <div class="form-group"><label for="cf_propaddress">Property or Space of Interest (if applicable)</label><input type="text" id="cf_propaddress" name="property" maxlength="300" placeholder="e.g. H-E-B Shopping Center, Suite 230, or an address"></div>
+          <div class="form-group">
+            <label for="cf_message">Message *</label>
+            <textarea id="cf_message" name="message" maxlength="5000" required placeholder="Please describe your situation, goals, and timeline. The more detail you provide, the better we can assist you."></textarea>
+          </div>
+          <input type="text" id="cf_website" name="bot-field" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" aria-hidden="true">
+          <button type="submit" class="btn-primary form-submit" id="cf_submitBtn">Submit Inquiry</button>
+          <div id="cf_status" class="form-status" role="status" aria-live="polite"></div>
+          </form>
+          <p style="font-size:0.75rem;color:var(--gray-400);margin-top:0.75rem;text-align:center;">We typically respond within one business day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" onclick="showPage('home')" style="margin-bottom:0;">
+        <div class="nav-logo-mark">BPI</div>
+        <div class="nav-logo-text"><span class="nav-logo-name">BPI Commercial LLC</span><span class="nav-logo-sub">Commercial Real Estate</span></div>
+      </div>
+      <p>A commercial real estate brokerage firm representing owners, investors, landlords, tenants, buyers, and sellers across all commercial property types.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4>
+      <a onclick="showPage('services')">Seller Representation</a><a onclick="showPage('services')">Buyer Representation</a><a onclick="showPage('services')">Landlord Representation</a><a onclick="showPage('services')">Tenant Representation</a><a onclick="showPage('services')">Investment Sales</a><a onclick="showPage('services')">Land Brokerage</a>
+    </div>
+    <div class="footer-col"><h4>Property Types</h4>
+      <a onclick="goToListings('retail')">Retail</a><a onclick="goToListings('office')">Office</a><a onclick="goToListings('industrial')">Industrial</a><a onclick="goToListings('land')">Land</a><a onclick="goToListings('multifamily')">Multifamily</a><a onclick="goToListings('mixed-use')">Mixed-Use</a>
+    </div>
+    <div class="footer-col"><h4>Contact</h4>
+      <a>(409) 866-2398</a><a>aburns@burnspropertiesinc.com</a><a>6845 Phelan Blvd</a><a>Beaumont, TX 77706</a>
+      <div style="margin-top:1rem;"><button class="btn-primary" style="font-size:0.75rem;padding:0.6rem 1.1rem;" onclick="showPage('contact')">Contact the Broker</button></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© <span id="footerYear">2026</span> BPI Commercial LLC. All rights reserved. Licensed Commercial Real Estate Brokerage.</p>
+    <p style="color:rgba(255,255,255,0.2);">BPI Commercial LLC · Andrew R. Burns, Principal Broker</p>
+  </div>
+  <div style="max-width:1280px;margin:0.5rem auto 0;text-align:center;">
+    <p style="font-size:0.7rem;color:rgba(255,255,255,0.18);">Site creation & IT consulting by Elizabeth Burns</p>
+  </div>
+</footer>
+
+<script>
+// ── SUPABASE CONNECTION ──
+// Replace these two values with your own Project URL and anon public key
+// (Supabase dashboard → Project Settings → API)
+const SUPABASE_URL = 'https://wlicfienopaprmqtxebf.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_wB091yEWcQuOxdcV4Nitbg_FCDIxxPb';
+// Guarded so the rest of the page (and the inquiry form) still works if the
+// Supabase library fails to load.
+const sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+// Supabase errors are plain objects, so console.error(error) alone renders as
+// "[object Object]" in some consoles. Log a readable message instead.
+function logSbError(context, error) {
+  const detail = (error && (error.message || error.error_description || error.msg)) || JSON.stringify(error);
+  console.error(`[${context}]`, detail, error);
+  return detail;
+}
+
+async function loadBrokerPhoto() {
+  if (!sb) return;
+  const { data, error } = await sb.from('site_settings').select('*').eq('key', 'broker_photo').maybeSingle();
+  if (error) {
+    logSbError('loadBrokerPhoto', error);
+    return;
+  }
+  // Only accept photos stored in this project's property-photos bucket, and
+  // build the <img> with DOM APIs so a bad value can never inject markup.
+  const allowedPrefix = SUPABASE_URL + '/storage/v1/object/public/property-photos/';
+  if (data && typeof data.value === 'string' && data.value.startsWith(allowedPrefix)) {
+    const img = document.createElement('img');
+    img.src = data.value;
+    img.alt = 'Andrew R. Burns, Principal Broker at BPI Commercial LLC';
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+    document.getElementById('broker-photo-wrap').replaceChildren(img);
+  }
+}
+
+// Footer property-type links navigate to the Properties page. The page
+// now shows a simple brochure grid, so there is no per-type filtering.
+function goToListings(filter) {
+  showPage('listings');
+}
+
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  const navEl = document.getElementById('nav-' + page);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(animateFadeIns, 100);
+  window.dispatchEvent(new Event('scroll'));
+}
+
+function toggleMobile() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+function animateFadeIns() {
+  const els = document.querySelectorAll('.fade-in:not(.visible)');
+  els.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 60) el.classList.add('visible');
+  });
+}
+window.addEventListener('scroll', animateFadeIns);
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+  animateFadeIns();
+  loadBrokerPhoto();
+});
+
+function scrollToInquiryForm() {
+  const form = document.getElementById('inquiryForm');
+  form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(() => document.getElementById('cf_first').focus({ preventScroll: true }), 500);
+}
+
+// ── ABOUT: OFFICE SKETCH (reveal, scroll parallax + fade, desktop hover tilt) ──
+(function () {
+  const section = document.getElementById('office-sketch');
+  if (!section) return;
+  const layer = section.querySelector('.office-sketch__parallax');
+  const tilt = section.querySelector('.office-sketch__tilt');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    if (reduceMotion.matches || !section.offsetParent) {
+      layer.style.removeProperty('--sketch-shift');
+      layer.style.removeProperty('--sketch-fade');
+      return;
+    }
+    const vh = window.innerHeight || 1;
+    const rect = section.getBoundingClientRect();
+    // 0 when the section enters at the bottom, 1 when it leaves at the top
+    const progress = clamp((vh - rect.top) / (vh + rect.height), 0, 1);
+    const drift = Math.min(48, Math.max(18, window.innerWidth * 0.035));
+    layer.style.setProperty('--sketch-shift', ((progress - 0.5) * 2 * drift).toFixed(1) + 'px');
+    // Fade out once the drawing's centre rises above ~32% of the viewport,
+    // reaching zero as it nears the top edge (reverses when scrolling back up)
+    const h = layer.offsetHeight;
+    const centre = rect.top + layer.offsetTop + h / 2;
+    const t = clamp((vh * 0.32 - centre) / (vh * 0.32 + h * 0.2), 0, 1);
+    layer.style.setProperty('--sketch-fade', (1 - t).toFixed(3));
+  }
+  function requestUpdate() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { section.classList.add('is-revealed'); requestUpdate(); } });
+    }, { threshold: 0.15 }).observe(section);
+  } else {
+    section.classList.add('is-revealed');
+  }
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+  reduceMotion.addEventListener && reduceMotion.addEventListener('change', requestUpdate);
+
+  // Restrained perspective shift on desktop hover
+  function resetTilt() {
+    section.classList.remove('is-hovering');
+    tilt.style.removeProperty('--sketch-rx');
+    tilt.style.removeProperty('--sketch-ry');
+    tilt.style.removeProperty('--sketch-lift');
+  }
+  tilt.addEventListener('pointermove', (e) => {
+    if (reduceMotion.matches || !finePointer.matches || e.pointerType !== 'mouse') return;
+    const r = tilt.getBoundingClientRect();
+    const x = clamp((e.clientX - r.left) / r.width * 2 - 1, -1, 1);
+    const y = clamp((e.clientY - r.top) / r.height * 2 - 1, -1, 1);
+    section.classList.add('is-hovering');
+    tilt.style.setProperty('--sketch-ry', (x * 2.5).toFixed(2) + 'deg');
+    tilt.style.setProperty('--sketch-rx', (-y * 1.5).toFixed(2) + 'deg');
+    tilt.style.setProperty('--sketch-lift', '-6px');
+  });
+  tilt.addEventListener('pointerleave', resetTilt);
+
+  requestUpdate();
+})();
+
+// ── CONTACT FORM SUBMISSION ──
+// Submissions go to Netlify Forms, which emails the broker (Reply-To is set
+// from the "email" field). A copy is also saved to Supabase for the admin page.
+const CF_REQUIRED = [
+  ['cf_first', 'First name'],
+  ['cf_last', 'Last name'],
+  ['cf_email', 'Email address'],
+  ['cf_type', 'Inquiry type'],
+  ['cf_message', 'Message']
+];
+const CF_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+function showFormStatus(type, html) {
+  const box = document.getElementById('cf_status');
+  box.className = 'form-status is-visible ' + (type === 'success' ? 'is-success' : 'is-error');
+  box.innerHTML = html;
+}
+function clearFormStatus() {
+  const box = document.getElementById('cf_status');
+  box.className = 'form-status';
+  box.innerHTML = '';
+}
+
+function validateInquiry() {
+  const missing = [];
+  let firstBad = null;
+  CF_REQUIRED.forEach(([id, label]) => {
+    const el = document.getElementById(id);
+    const ok = el.value.trim() !== '';
+    el.classList.toggle('field-invalid', !ok);
+    el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    if (!ok) { missing.push(label); if (!firstBad) firstBad = el; }
+  });
+  const emailEl = document.getElementById('cf_email');
+  const emailVal = emailEl.value.trim();
+  if (emailVal && !CF_EMAIL_RE.test(emailVal)) {
+    emailEl.classList.add('field-invalid');
+    emailEl.setAttribute('aria-invalid', 'true');
+    if (!firstBad) firstBad = emailEl;
+    if (firstBad) firstBad.focus();
+    return missing.length
+      ? 'Please complete the required fields: ' + missing.join(', ') + '. Also check that your email address is valid.'
+      : 'Please enter a valid email address (for example, name@company.com).';
+  }
+  if (missing.length) {
+    firstBad.focus();
+    return 'Please complete the required fields: ' + missing.join(', ') + '.';
+  }
+  return null;
+}
+
+// Clear the red outline as soon as a field is fixed
+CF_REQUIRED.forEach(([id]) => {
+  const el = document.getElementById(id);
+  const evt = el.tagName === 'SELECT' ? 'change' : 'input';
+  el.addEventListener(evt, () => {
+    if (el.value.trim() !== '') { el.classList.remove('field-invalid'); el.setAttribute('aria-invalid', 'false'); }
+  });
+});
+
+async function submitForm(event) {
+  if (event) event.preventDefault();
+  const form = document.getElementById('inquiryForm');
+  const btn = document.getElementById('cf_submitBtn');
+  clearFormStatus();
+
+  // Honeypot check — bots fill out hidden fields, real visitors never see this one
+  if (document.getElementById('cf_website').value.trim() !== '') {
+    return; // silently drop the submission, no message shown
+  }
+
+  const errorMsg = validateInquiry();
+  if (errorMsg) {
+    showFormStatus('error', errorMsg);
+    return;
+  }
+
+  // Simple cooldown to prevent rapid repeat submissions
+  const lastSubmit = sessionStorage.getItem('lastInquirySubmit');
+  if (lastSubmit && Date.now() - parseInt(lastSubmit, 10) < 30000) {
+    showFormStatus('error', 'Your inquiry was just sent. Please wait a moment before submitting another one.');
+    return;
+  }
+
+  const first = document.getElementById('cf_first').value.trim();
+  const last = document.getElementById('cf_last').value.trim();
+  const property = document.getElementById('cf_propaddress').value.trim();
+  document.getElementById('cf_subject').value =
+    'New website inquiry: ' + first + ' ' + last + (property ? ' - ' + property : '');
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  const formData = new FormData(form);
+  // Trim values before sending
+  const body = new URLSearchParams();
+  for (const [k, v] of formData.entries()) body.append(k, typeof v === 'string' ? v.trim() : v);
+
+  let sent = false;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 20000);
+  try {
+    const res = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString(),
+      signal: controller.signal
+    });
+    sent = res.ok;
+    if (!res.ok) console.error('[submitInquiry] Netlify Forms responded with status', res.status);
+  } catch (err) {
+    console.error('[submitInquiry] Network error', err);
+  } finally {
+    clearTimeout(timer);
+  }
+
+  if (!sent) {
+    showFormStatus('error', 'Sorry — your inquiry could not be sent. Please try again, or contact Andrew directly at <a href="tel:4098662398">(409) 866-2398</a> or <a href="mailto:aburns@burnspropertiesinc.com">aburns@burnspropertiesinc.com</a>.');
+    btn.disabled = false;
+    btn.textContent = 'Submit Inquiry';
+    return;
+  }
+
+  // Also save a copy for the admin inquiries page. The email has already been
+  // sent at this point, so a failure here is logged but not shown to the visitor.
+  if (sb) {
+    try {
+      const { error } = await sb.from('inquiries').insert({
+        first_name: first,
+        last_name: last,
+        email: document.getElementById('cf_email').value.trim(),
+        phone: document.getElementById('cf_phone').value.trim(),
+        company: document.getElementById('cf_company').value.trim(),
+        inquiry_type: document.getElementById('cf_type').value,
+        property_address: property,
+        message: document.getElementById('cf_message').value.trim()
+      });
+      if (error) logSbError('submitInquiry (admin copy)', error);
+    } catch (err) {
+      console.error('[submitInquiry] admin copy failed', err);
+    }
+  }
+
+  sessionStorage.setItem('lastInquirySubmit', Date.now().toString());
+  form.reset();
+  CF_REQUIRED.forEach(([id]) => document.getElementById(id).classList.remove('field-invalid'));
+  showFormStatus('success', '<strong>Thank you — your inquiry has been sent.</strong> A broker from BPI Commercial LLC will contact you within one business day.');
+  btn.disabled = false;
+  btn.textContent = 'Submit Inquiry';
+}
+document.getElementById('inquiryForm').addEventListener('submit', submitForm);
+</script>
+</body>
+</html>

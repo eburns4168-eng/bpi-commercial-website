@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>BPI Commercial LLC — Admin</title>
+<script src="/vendor/supabase-js-2.117.2.js"></script>
+<style>
+  body { font-family: -apple-system, Arial, sans-serif; background: #F1F3F5; margin:0; padding: 2rem; color:#0B1F3A; }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 1.4rem; margin-bottom: 0.25rem; }
+  .sub { color:#6C757D; margin-bottom: 2rem; font-size:0.9rem; }
+  .card { background:#fff; border:1px solid #E9ECEF; border-radius:8px; padding:1.5rem; margin-bottom:1.5rem; }
+  label { display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:#343A40; margin-bottom:0.35rem; margin-top:1rem; }
+  input, select, textarea { width:100%; padding:0.7rem; border:1px solid #E9ECEF; border-radius:4px; font-size:0.9rem; box-sizing:border-box; }
+  textarea { min-height:80px; }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  button { background:#C8A96E; color:#0B1F3A; border:none; font-weight:700; padding:0.75rem 1.5rem; border-radius:4px; cursor:pointer; margin-top:1.5rem; font-size:0.85rem; }
+  button:disabled { opacity:0.6; cursor:not-allowed; }
+  button.secondary { background:#E9ECEF; color:#343A40; margin-left:0.5rem; }
+  button.danger { background:#dc3545; color:#fff; margin-top:0; }
+  #lock { text-align:center; padding-top:4rem; }
+  #lock input { max-width:280px; margin: 1rem auto; display:block; }
+  .notice { background:#FFF4E5; border:1px solid #F5C77E; color:#7A4B00; padding:0.75rem 1rem; border-radius:6px; font-size:0.85rem; margin-bottom:1.5rem; }
+  .inq { border-bottom:1px solid #F1F3F5; padding:1rem 0; display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; }
+  .inq-meta { color:#6C757D; font-size:0.85rem; }
+  .inq-msg { margin-top:0.5rem; font-size:0.9rem; white-space:pre-wrap; overflow-wrap:anywhere; }
+  .inq-date { color:#ADB5BD; font-size:0.75rem; }
+</style>
+</head>
+<body>
+
+<div id="lock">
+  <h1>BPI Commercial LLC — Admin</h1>
+  <p class="sub">Admin access</p>
+  <form id="loginForm" autocomplete="on">
+    <input type="email" id="loginEmail" placeholder="Email" autocomplete="username" required>
+    <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" required>
+    <button type="submit" id="loginBtn">Log In</button>
+  </form>
+  <p id="loginError" style="color:#dc3545;font-size:0.85rem;margin-top:1rem;"></p>
+</div>
+
+<div class="wrap" id="adminPanel" style="display:none;">
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <h1>BPI Commercial LLC — Admin</h1>
+    <button class="secondary" type="button" id="logoutBtn">Log Out</button>
+  </div>
+  <p class="sub">Property listings will be managed through CommGate. Existing listings remain available on the live site.</p>
+  <div id="securityNotice" class="notice" style="display:none;"></div>
+
+  <div class="card">
+    <h3>Broker Photo</h3>
+    <p class="sub" style="margin-bottom:1rem;">Optional: upload a new photo to replace Andrew's photo in the "Meet the Broker" section on the Contact page. JPEG, PNG or WebP, up to 5 MB.</p>
+    <input type="file" id="f_brokerPhoto" accept="image/jpeg,image/png,image/webp">
+    <div id="brokerPhotoPreview" style="margin-top:0.75rem;"></div>
+  </div>
+
+  <div class="card" id="inquiries">
+    <h3>Contact Form Inquiries</h3>
+    <p class="sub" style="margin-bottom:0.5rem;">Every inquiry is also emailed to aburns@burnspropertiesinc.com. This list is a backup copy.</p>
+    <div id="inquiriesList">Loading…</div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://wlicfienopaprmqtxebf.supabase.co';
+// Publishable (public) key — safe in browser code. Access is enforced by
+// Supabase Row Level Security, never by this page. Never put a secret key here.
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_wB091yEWcQuOxdcV4Nitbg_FCDIxxPb';
+const PHOTO_PREFIX = SUPABASE_URL + '/storage/v1/object/public/property-photos/';
+const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
+const ALLOWED_PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+
+const sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY) : null;
+const $ = (id) => document.getElementById(id);
+
+function setText(el, text, color) {
+  el.textContent = text;
+  el.style.color = color || '';
+}
+
+function showLock(message) {
+  $('lock').style.display = 'block';
+  $('adminPanel').style.display = 'none';
+  setText($('loginError'), message || '', '#dc3545');
+}
+
+async function login(event) {
+  event.preventDefault();
+  if (!sb) { showLock('Could not load the login service. Please refresh and try again.'); return; }
+  const email = $('loginEmail').value.trim();
+  const password = $('loginPassword').value;
+  const btn = $('loginBtn');
+  setText($('loginError'), '');
+  btn.disabled = true;
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  btn.disabled = false;
+  $('loginPassword').value = '';
+  if (error) { setText($('loginError'), 'Login failed. Check your email and password.', '#dc3545'); return; }
+  await openAdminIfAuthorized();
+}
+
+async function logout() {
+  if (sb) await sb.auth.signOut();
+  showLock('');
+}
+
+// Confirms the signed-in account is on the admin list (public.is_admin(),
+// created by the security SQL). The database enforces this too; this check
+// just keeps non-admin accounts out of the panel.
+async function openAdminIfAuthorized() {
+  const { data, error } = await sb.rpc('is_admin');
+  if (error) {
+    $('securityNotice').textContent = 'Security setup not detected: run the Supabase security SQL so only approved admin accounts can see inquiries.';
+    $('securityNotice').style.display = 'block';
+  } else if (data !== true) {
+    await sb.auth.signOut();
+    showLock('This account is not authorized for admin access.');
+    return;
+  }
+  $('lock').style.display = 'none';
+  $('adminPanel').style.display = 'block';
+  loadInquiries();
+  loadBrokerPhoto();
+  if (window.location.hash === '#inquiries') {
+    setTimeout(() => $('inquiries').scrollIntoView({ behavior: 'smooth' }), 300);
+  }
+}
+
+function renderPhoto(url, savedNote) {
+  const box = $('brokerPhotoPreview');
+  box.replaceChildren();
+  if (typeof url !== 'string' || !url.startsWith(PHOTO_PREFIX)) return;
+  const img = document.createElement('img');
+  img.src = url;
+  img.alt = 'Current broker photo';
+  img.style.cssText = 'max-width:200px;border-radius:6px;display:block;';
+  box.appendChild(img);
+  if (savedNote) {
+    const p = document.createElement('p');
+    p.style.cssText = 'color:#28a745;font-size:0.85rem;margin-top:0.5rem;';
+    p.textContent = 'Saved — now live on the site.';
+    box.appendChild(p);
+  }
+}
+
+async function uploadBrokerPhoto(e) {
+  const file = e.target.files[0];
+  const box = $('brokerPhotoPreview');
+  if (!file) return;
+  if (!ALLOWED_PHOTO_TYPES.includes(file.type)) { setText(box, 'Please choose a JPEG, PNG or WebP image.', '#dc3545'); return; }
+  if (file.size > MAX_PHOTO_BYTES) { setText(box, 'That image is larger than 5 MB. Please choose a smaller file.', '#dc3545'); return; }
+  setText(box, 'Uploading…');
+  const ext = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp' }[file.type];
+  const fileName = `broker-${Date.now()}.${ext}`;
+  const { error: uploadErr } = await sb.storage.from('property-photos').upload(fileName, file, { contentType: file.type, upsert: false });
+  if (uploadErr) { setText(box, 'Upload failed: ' + uploadErr.message, '#dc3545'); return; }
+  const { data: pub } = sb.storage.from('property-photos').getPublicUrl(fileName);
+  const { error: saveErr } = await sb.from('site_settings').upsert({ key: 'broker_photo', value: pub.publicUrl });
+  if (saveErr) { setText(box, 'Uploaded, but could not set it as the broker photo: ' + saveErr.message, '#dc3545'); return; }
+  renderPhoto(pub.publicUrl, true);
+}
+
+async function loadBrokerPhoto() {
+  const { data, error } = await sb.from('site_settings').select('value').eq('key', 'broker_photo').maybeSingle();
+  if (!error && data) renderPhoto(data.value, false);
+}
+
+// Inquiry fields come from the public contact form and are untrusted, so they
+// are only ever inserted as text (textContent), never as HTML.
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined && text !== null) node.textContent = String(text);
+  return node;
+}
+
+async function loadInquiries() {
+  const list = $('inquiriesList');
+  const { data, error } = await sb.from('inquiries').select('*').order('created_at', { ascending: false });
+  if (error) { setText(list, 'Error loading inquiries: ' + error.message, '#dc3545'); return; }
+  list.replaceChildren();
+  if (!data.length) { list.appendChild(el('p', 'inq-meta', 'No inquiries yet.')); return; }
+  data.forEach(i => {
+    const row = el('div', 'inq');
+    const body = el('div');
+    const title = el('div');
+    title.appendChild(el('strong', null, `${i.first_name || ''} ${i.last_name || ''}`.trim()));
+    if (i.inquiry_type) title.appendChild(document.createTextNode(' — ' + i.inquiry_type));
+    body.appendChild(title);
+    const contact = [i.email, i.phone, i.company].filter(Boolean).join(' · ');
+    if (contact) body.appendChild(el('div', 'inq-meta', contact));
+    if (i.property_address) body.appendChild(el('div', 'inq-meta', 'Property: ' + i.property_address));
+    body.appendChild(el('p', 'inq-msg', i.message || ''));
+    const when = new Date(i.created_at);
+    body.appendChild(el('span', 'inq-date', isNaN(when) ? '' : when.toLocaleString()));
+    const del = el('button', 'danger', 'Delete');
+    del.type = 'button';
+    del.addEventListener('click', () => deleteInquiry(Number(i.id)));
+    row.append(body, del);
+    list.appendChild(row);
+  });
+}
+
+async function deleteInquiry(id) {
+  if (!Number.isInteger(id)) return;
+  if (!confirm('Delete this inquiry?')) return;
+  const { error } = await sb.from('inquiries').delete().eq('id', id);
+  if (error) { alert('Error: ' + error.message); return; }
+  loadInquiries();
+}
+
+$('loginForm').addEventListener('submit', login);
+$('logoutBtn').addEventListener('click', logout);
+$('f_brokerPhoto').addEventListener('change', uploadBrokerPhoto);
+
+// Resume an existing session (still re-checks admin authorization)
+if (sb) {
+  sb.auth.getSession().then(({ data }) => { if (data.session) openAdminIfAuthorized(); });
+} else {
+  showLock('Could not load the login service. Please refresh and try again.');
+}
+</script>
+</body>
+</html>
